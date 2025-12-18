@@ -1,0 +1,254 @@
+{
+    "name": "@skybaer0804/pui",
+    "version": "1.0.0",
+    "description": "Pui is a Preact UI library for building web applications.",
+    "main": "./dist/index.js",
+    "module": "./dist/index.esm.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.esm.js",
+            "require": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        },
+        "./Accordion": {
+            "import": "./dist/ui-component/Accordion/index.esm.js",
+            "require": "./dist/ui-component/Accordion/index.js",
+            "types": "./dist/ui-component/Accordion/index.d.ts"
+        },
+        "./Alert": {
+            "import": "./dist/ui-component/Alert/index.esm.js",
+            "require": "./dist/ui-component/Alert/index.js",
+            "types": "./dist/ui-component/Alert/index.d.ts"
+        },
+        "./Avatar": {
+            "import": "./dist/ui-component/Avatar/index.esm.js",
+            "require": "./dist/ui-component/Avatar/index.js",
+            "types": "./dist/ui-component/Avatar/index.d.ts"
+        },
+        "./Badge": {
+            "import": "./dist/ui-component/Badge/index.esm.js",
+            "require": "./dist/ui-component/Badge/index.js",
+            "types": "./dist/ui-component/Badge/index.d.ts"
+        },
+        "./BottomNavigation": {
+            "import": "./dist/ui-component/BottomNavigation/index.esm.js",
+            "require": "./dist/ui-component/BottomNavigation/index.js",
+            "types": "./dist/ui-component/BottomNavigation/index.d.ts"
+        },
+        "./Breadcrumbs": {
+            "import": "./dist/ui-component/Breadcrumbs/index.esm.js",
+            "require": "./dist/ui-component/Breadcrumbs/index.js",
+            "types": "./dist/ui-component/Breadcrumbs/index.d.ts"
+        },
+        "./Button": {
+            "import": "./dist/ui-component/Button/index.esm.js",
+            "require": "./dist/ui-component/Button/index.js",
+            "types": "./dist/ui-component/Button/index.d.ts"
+        },
+        "./ButtonGroup": {
+            "import": "./dist/ui-component/ButtonGroup/index.esm.js",
+            "require": "./dist/ui-component/ButtonGroup/index.js",
+            "types": "./dist/ui-component/ButtonGroup/index.d.ts"
+        },
+        "./Card": {
+            "import": "./dist/ui-component/Card/index.esm.js",
+            "require": "./dist/ui-component/Card/index.js",
+            "types": "./dist/ui-component/Card/index.d.ts"
+        },
+        "./Checkbox": {
+            "import": "./dist/ui-component/Checkbox/index.esm.js",
+            "require": "./dist/ui-component/Checkbox/index.js",
+            "types": "./dist/ui-component/Checkbox/index.d.ts"
+        },
+        "./CircularProgress": {
+            "import": "./dist/ui-component/CircularProgress/index.esm.js",
+            "require": "./dist/ui-component/CircularProgress/index.js",
+            "types": "./dist/ui-component/CircularProgress/index.d.ts"
+        },
+        "./Collapsible": {
+            "import": "./dist/ui-component/Collapsible/index.esm.js",
+            "require": "./dist/ui-component/Collapsible/index.js",
+            "types": "./dist/ui-component/Collapsible/index.d.ts"
+        },
+        "./Dialog": {
+            "import": "./dist/ui-component/Dialog/index.esm.js",
+            "require": "./dist/ui-component/Dialog/index.js",
+            "types": "./dist/ui-component/Dialog/index.d.ts"
+        },
+        "./Divider": {
+            "import": "./dist/ui-component/Divider/index.esm.js",
+            "require": "./dist/ui-component/Divider/index.js",
+            "types": "./dist/ui-component/Divider/index.d.ts"
+        },
+        "./Drawer": {
+            "import": "./dist/ui-component/Drawer/index.esm.js",
+            "require": "./dist/ui-component/Drawer/index.js",
+            "types": "./dist/ui-component/Drawer/index.d.ts"
+        },
+        "./FloatingActionButton": {
+            "import": "./dist/ui-component/FloatingActionButton/index.esm.js",
+            "require": "./dist/ui-component/FloatingActionButton/index.js",
+            "types": "./dist/ui-component/FloatingActionButton/index.d.ts"
+        },
+        "./Input": {
+            "import": "./dist/ui-component/Input/index.esm.js",
+            "require": "./dist/ui-component/Input/index.js",
+            "types": "./dist/ui-component/Input/index.d.ts"
+        },
+        "./Layout": {
+            "import": "./dist/ui-component/Layout/index.esm.js",
+            "require": "./dist/ui-component/Layout/index.js",
+            "types": "./dist/ui-component/Layout/index.d.ts"
+        },
+        "./List": {
+            "import": "./dist/ui-component/List/index.esm.js",
+            "require": "./dist/ui-component/List/index.js",
+            "types": "./dist/ui-component/List/index.d.ts"
+        },
+        "./Loading": {
+            "import": "./dist/ui-component/Loading/index.esm.js",
+            "require": "./dist/ui-component/Loading/index.js",
+            "types": "./dist/ui-component/Loading/index.d.ts"
+        },
+        "./Pagination": {
+            "import": "./dist/ui-component/Pagination/index.esm.js",
+            "require": "./dist/ui-component/Pagination/index.js",
+            "types": "./dist/ui-component/Pagination/index.d.ts"
+        },
+        "./Paper": {
+            "import": "./dist/ui-component/Paper/index.esm.js",
+            "require": "./dist/ui-component/Paper/index.js",
+            "types": "./dist/ui-component/Paper/index.d.ts"
+        },
+        "./Radio": {
+            "import": "./dist/ui-component/Radio/index.esm.js",
+            "require": "./dist/ui-component/Radio/index.js",
+            "types": "./dist/ui-component/Radio/index.d.ts"
+        },
+        "./RadioGroup": {
+            "import": "./dist/ui-component/RadioGroup/index.esm.js",
+            "require": "./dist/ui-component/RadioGroup/index.js",
+            "types": "./dist/ui-component/RadioGroup/index.d.ts"
+        },
+        "./Select": {
+            "import": "./dist/ui-component/Select/index.esm.js",
+            "require": "./dist/ui-component/Select/index.js",
+            "types": "./dist/ui-component/Select/index.d.ts"
+        },
+        "./Skeleton": {
+            "import": "./dist/ui-component/Skeleton/index.esm.js",
+            "require": "./dist/ui-component/Skeleton/index.js",
+            "types": "./dist/ui-component/Skeleton/index.d.ts"
+        },
+        "./SpeedDial": {
+            "import": "./dist/ui-component/SpeedDial/index.esm.js",
+            "require": "./dist/ui-component/SpeedDial/index.js",
+            "types": "./dist/ui-component/SpeedDial/index.d.ts"
+        },
+        "./StatusChip": {
+            "import": "./dist/ui-component/StatusChip/index.esm.js",
+            "require": "./dist/ui-component/StatusChip/index.js",
+            "types": "./dist/ui-component/StatusChip/index.d.ts"
+        },
+        "./Stepper": {
+            "import": "./dist/ui-component/Stepper/index.esm.js",
+            "require": "./dist/ui-component/Stepper/index.js",
+            "types": "./dist/ui-component/Stepper/index.d.ts"
+        },
+        "./Switch": {
+            "import": "./dist/ui-component/Switch/index.esm.js",
+            "require": "./dist/ui-component/Switch/index.js",
+            "types": "./dist/ui-component/Switch/index.d.ts"
+        },
+        "./Table": {
+            "import": "./dist/ui-component/Table/index.esm.js",
+            "require": "./dist/ui-component/Table/index.js",
+            "types": "./dist/ui-component/Table/index.d.ts"
+        },
+        "./Tabs": {
+            "import": "./dist/ui-component/Tabs/index.esm.js",
+            "require": "./dist/ui-component/Tabs/index.js",
+            "types": "./dist/ui-component/Tabs/index.d.ts"
+        },
+        "./TextField": {
+            "import": "./dist/ui-component/TextField/index.esm.js",
+            "require": "./dist/ui-component/TextField/index.js",
+            "types": "./dist/ui-component/TextField/index.d.ts"
+        },
+        "./ThemeProvider": {
+            "import": "./dist/context/ThemeProvider/index.esm.js",
+            "require": "./dist/context/ThemeProvider/index.js",
+            "types": "./dist/context/ThemeProvider/index.d.ts"
+        },
+        "./Tooltip": {
+            "import": "./dist/ui-component/Tooltip/index.esm.js",
+            "require": "./dist/ui-component/Tooltip/index.js",
+            "types": "./dist/ui-component/Tooltip/index.d.ts"
+        },
+        "./Typography": {
+            "import": "./dist/ui-component/Typography/index.esm.js",
+            "require": "./dist/ui-component/Typography/index.js",
+            "types": "./dist/ui-component/Typography/index.d.ts"
+        },
+        "./styles": "./dist/styles/tokens/index.css",
+        "./styles/tokens": "./dist/styles/tokens/index.css"
+    },
+    "sideEffects": [
+        "**/*.css",
+        "**/*.scss"
+    ],
+    "scripts": {
+        "build": "rollup -c",
+        "dev": "rollup -c -w",
+        "test": "node test/socket-test.js",
+        "test:sdk": "node test/sdk-test.js",
+        "prepublishOnly": "npm run build",
+        "link": "npm run build && npm link",
+        "unlink": "npm unlink",
+        "pack": "npm run build && npm pack"
+    },
+    "keywords": [
+        "preact",
+        "ui",
+        "library",
+        "components",
+        "design-system",
+        "ui-components"
+    ],
+    "author": "Nodejs <nodejs1234@naver.com>",
+    "license": "MIT",
+    "peerDependencies": {
+        "@tabler/icons-react": "^3.0.0",
+        "preact": "^10.19.0"
+    },
+    "dependencies": {
+        "@preact/signals": "^2.5.1"
+    },
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^25.0.7",
+        "@rollup/plugin-node-resolve": "^15.2.3",
+        "@rollup/plugin-typescript": "^11.1.5",
+        "@tabler/icons-react": "^3.36.0",
+        "@types/node": "^20.10.0",
+        "preact": "^10.19.3",
+        "rollup": "^4.6.0",
+        "tslib": "^2.6.2",
+        "typescript": "^5.3.3"
+    },
+    "files": [
+        "dist",
+        "README.md"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/skybaer0804/pui.git"
+    },
+    "homepage": "https://github.com/skybaer0804/pui#readme",
+    "bugs": {
+        "url": "https://github.com/skybaer0804/pui/issues"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}
