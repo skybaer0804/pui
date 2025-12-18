@@ -138,5 +138,7 @@ export type { SpeedDialProps, SpeedDialAction } from './ui-component/SpeedDial/S
 export { Pagination } from './ui-component/Pagination/Pagination';
 export type { PaginationProps } from './ui-component/Pagination/Pagination';
 
-// Styles
-import './styles/tokens/index.scss';
+// NOTE(A-plan):
+// 스타일은 JS 번들에 포함하지 않습니다.
+// 사용자는 아래 1줄로 스타일을 로드합니다:
+// import '@skybaer0804/pui/styles.css';

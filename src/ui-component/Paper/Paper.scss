@@ -1,61 +1,61 @@
-@use '/src/styles/tokens/index';
+@use '../../styles/tokens/index';
 
 .paper {
-  background-color: var(--color-surface-level-1);
-  color: var(--color-text-primary);
-  transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: var(--primitive-radius-md); // Default radius
-  overflow: hidden;
-
-  // 다크모드에서 배경색 명시적 설정
-  [data-theme='dark'] & {
     background-color: var(--color-surface-level-1);
-  }
+    color: var(--color-text-primary);
+    transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: var(--primitive-radius-md); // Default radius
+    overflow: hidden;
 
-  &--square {
-    border-radius: 0;
-  }
+    // 다크모드에서 배경색 명시적 설정
+    [data-theme='dark'] & {
+        background-color: var(--color-surface-level-1);
+    }
 
-  &--outlined {
-    border: 1px solid var(--color-border-default);
-    box-shadow: none;
-  }
+    &--square {
+        border-radius: 0;
+    }
 
-  &--elevation-0 {
-    box-shadow: none;
-  }
+    &--outlined {
+        border: 1px solid var(--color-border-default);
+        box-shadow: none;
+    }
 
-  &--elevation-1 {
-    box-shadow: var(--elevation-shadow-1);
-  }
+    &--elevation-0 {
+        box-shadow: none;
+    }
 
-  &--elevation-2 {
-    box-shadow: var(--elevation-shadow-2);
-  }
+    &--elevation-1 {
+        box-shadow: var(--elevation-shadow-1);
+    }
 
-  &--elevation-3 {
-    box-shadow: var(--elevation-shadow-3);
-  }
+    &--elevation-2 {
+        box-shadow: var(--elevation-shadow-2);
+    }
 
-  &--elevation-4 {
-    box-shadow: var(--elevation-shadow-4);
-  }
+    &--elevation-3 {
+        box-shadow: var(--elevation-shadow-3);
+    }
 
-  // Assuming we have up to 4 or define more
+    &--elevation-4 {
+        box-shadow: var(--elevation-shadow-4);
+    }
 
-  &--padding-none {
-    padding: 0;
-  }
+    // Assuming we have up to 4 or define more
 
-  &--padding-sm {
-    padding: var(--space-gap-sm);
-  }
+    &--padding-none {
+        padding: 0;
+    }
 
-  &--padding-md {
-    padding: var(--space-gap-md);
-  }
+    &--padding-sm {
+        padding: var(--space-gap-sm);
+    }
 
-  &--padding-lg {
-    padding: var(--space-gap-lg);
-  }
+    &--padding-md {
+        padding: var(--space-gap-md);
+    }
+
+    &--padding-lg {
+        padding: var(--space-gap-lg);
+    }
 }

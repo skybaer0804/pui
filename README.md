@@ -18,7 +18,7 @@ pnpm add @skybaer0804/pui
 
 ```tsx
 import { Button, Card, ThemeProvider } from '@skybaer0804/pui';
-import '@skybaer0804/pui/styles';
+import '@skybaer0804/pui/styles.css';
 
 function App() {
     return (
@@ -39,7 +39,7 @@ MUI처럼 특정 컴포넌트만 import하여 사용할 수 있습니다:
 import { Button } from '@skybaer0804/pui/Button';
 import { Card } from '@skybaer0804/pui/Card';
 import { ThemeProvider } from '@skybaer0804/pui/ThemeProvider';
-import '@skybaer0804/pui/styles';
+import '@skybaer0804/pui/styles.css';
 ```
 
 ### 디자인 토큰 오버라이드

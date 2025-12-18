@@ -2,14 +2,14 @@
     "name": "@skybaer0804/pui",
     "version": "1.0.0",
     "description": "Pui is a Preact UI library for building web applications.",
-    "main": "./dist/index.js",
-    "module": "./dist/index.esm.js",
-    "types": "./dist/index.d.ts",
+    "main": "./dist/index/index.js",
+    "module": "./dist/index/index.esm.js",
+    "types": "./dist/index/index.d.ts",
     "exports": {
         ".": {
-            "import": "./dist/index.esm.js",
-            "require": "./dist/index.js",
-            "types": "./dist/index.d.ts"
+            "import": "./dist/index/index.esm.js",
+            "require": "./dist/index/index.js",
+            "types": "./dist/index/index.d.ts"
         },
         "./Accordion": {
             "import": "./dist/ui-component/Accordion/index.esm.js",
@@ -191,15 +191,16 @@
             "require": "./dist/ui-component/Typography/index.js",
             "types": "./dist/ui-component/Typography/index.d.ts"
         },
-        "./styles": "./dist/styles/tokens/index.css",
-        "./styles/tokens": "./dist/styles/tokens/index.css"
+        "./styles": "./dist/styles.css",
+        "./styles.css": "./dist/styles.css",
+        "./styles/tokens": "./dist/styles.css"
     },
     "sideEffects": [
-        "**/*.css",
-        "**/*.scss"
+        "**/*.css"
     ],
     "scripts": {
-        "build": "rollup -c",
+        "build:styles": "sass src/styles/pui.scss dist/styles.css --no-source-map --style=compressed",
+        "build": "npm run build:styles && rollup -c",
         "dev": "rollup -c -w",
         "test": "node test/socket-test.js",
         "test:sdk": "node test/sdk-test.js",
@@ -233,6 +234,7 @@
         "@types/node": "^20.10.0",
         "preact": "^10.19.3",
         "rollup": "^4.6.0",
+        "sass": "^1.80.6",
         "tslib": "^2.6.2",
         "typescript": "^5.3.3"
     },

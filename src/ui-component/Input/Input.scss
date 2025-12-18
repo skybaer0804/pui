@@ -1,6 +1,6 @@
-@use '/src/styles/tokens/index';
-@use '/src/styles/tokens/scss-variables/semantic-space' as space;
-@use '/src/styles/tokens/scss-variables/primitive-shape' as shape;
+@use '../../styles/tokens/index';
+@use '../../styles/tokens/scss-variables/semantic-space' as space;
+@use '../../styles/tokens/scss-variables/primitive-shape' as shape;
 
 .input-group {
     display: flex;

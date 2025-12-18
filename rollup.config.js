@@ -5,7 +5,7 @@ const { readFileSync } = require('fs');
 
 const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
 
-// 모든 컴포넌트와 메인 엔트리 포인트
+// 모든 컴포넌트와 메인 엔트리 포인트 (subpath exports 유지용)
 const entries = {
     index: 'src/index.ts',
     'context/ThemeProvider': 'src/context/ThemeProvider/index.ts',
@@ -46,45 +46,49 @@ const entries = {
     'ui-component/Typography': 'src/ui-component/Typography/index.ts',
 };
 
-function createConfig(outputDir, format) {
-    return Object.keys(entries).map((entryName) => {
-        const input = entries[entryName];
-        const outputFile = format === 'es' ? `${outputDir}/${entryName}/index.esm.js` : `${outputDir}/${entryName}/index.js`;
+function createConfig(format) {
+    const isEsm = format === 'es';
 
-        return {
-            input,
-            output: {
-                file: outputFile,
-                format,
-                exports: 'named',
-                sourcemap: true,
-            },
-            external: [
-                ...Object.keys(pkg.peerDependencies || {}),
-                ...Object.keys(pkg.dependencies || {}),
-                'preact',
-                'preact/hooks',
-                'preact/jsx-runtime',
-                '@tabler/icons-react',
-                /\.scss$/,
-                /\.css$/,
-            ],
-            plugins: [
-                resolve({
-                    extensions: ['.ts', '.tsx', '.js', '.jsx'],
-                }),
-                commonjs(),
-                typescript({
-                    tsconfig: './tsconfig.json',
-                    declaration: true,
-                    declarationDir: outputDir,
-                    rootDir: 'src',
-                    exclude: ['**/*.test.ts', '**/*.test.tsx', '**/node_modules/**'],
-                    allowImportingTsExtensions: false,
-                }),
-            ],
-        };
-    });
+    return {
+        input: entries,
+        output: {
+            dir: 'dist',
+            format,
+            exports: 'named',
+            sourcemap: true,
+            // subpath exports 유지: dist/ui-component/Button/index(.esm).js 형태
+            entryFileNames: isEsm ? '[name]/index.esm.js' : '[name]/index.js',
+            // 공통 모듈(ThemeProvider 등)은 shared chunk로 분리되어 중복 Context 문제를 줄임
+            chunkFileNames: isEsm ? 'shared/[name]-[hash].esm.js' : 'shared/[name]-[hash].js',
+        },
+        // NOTE:
+        // A안에서는 JS가 스타일을 import 하지 않으므로 CSS/SCSS external 처리 자체가 중요하지 않습니다.
+        // (단, 혹시라도 남아있는 스타일 import가 있으면 번들에 포함되지 않도록 유지)
+        external: [
+            ...Object.keys(pkg.peerDependencies || {}),
+            ...Object.keys(pkg.dependencies || {}),
+            'preact',
+            'preact/hooks',
+            'preact/jsx-runtime',
+            '@tabler/icons-react',
+            /\.scss$/,
+            /\.css$/,
+        ],
+        plugins: [
+            resolve({
+                extensions: ['.ts', '.tsx', '.js', '.jsx'],
+            }),
+            commonjs(),
+            typescript({
+                tsconfig: './tsconfig.json',
+                declaration: isEsm, // d.ts는 1번만 생성(중복 생성 방지)
+                ...(isEsm ? { declarationDir: 'dist' } : {}),
+                rootDir: 'src',
+                exclude: ['**/*.test.ts', '**/*.test.tsx', '**/node_modules/**'],
+                allowImportingTsExtensions: false,
+            }),
+        ],
+    };
 }
 
-module.exports = [...createConfig('dist', 'cjs'), ...createConfig('dist', 'es')];
+module.exports = [createConfig('cjs'), createConfig('es')];
