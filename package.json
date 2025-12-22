@@ -201,6 +201,7 @@
     "scripts": {
         "build:styles": "sass src/styles/pui.scss dist/styles.css --no-source-map --style=compressed",
         "build": "npm run build:styles && rollup -c",
+        "build:watch": "npm run build:styles && rollup -c -w",
         "dev": "rollup -c -w",
         "test": "node test/socket-test.js",
         "test:sdk": "node test/sdk-test.js",
