@@ -1,6 +1,7 @@
 import { JSX } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
 import { useTheme } from '../../context/ThemeProvider';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
 export interface BreadcrumbItem {
     label: preact.ComponentChildren;
@@ -9,7 +10,7 @@ export interface BreadcrumbItem {
     disabled?: boolean;
 }
 
-export interface BreadcrumbsProps extends Omit<JSX.HTMLAttributes<HTMLElement>, 'onChange'> {
+export interface BreadcrumbsProps extends Omit<JSX.HTMLAttributes<HTMLElement>, 'onChange' | 'style'> {
     items: BreadcrumbItem[];
     separator?: preact.ComponentChildren; // default '/'
     ariaLabel?: string;
@@ -17,6 +18,7 @@ export interface BreadcrumbsProps extends Omit<JSX.HTMLAttributes<HTMLElement>, 
     itemsBeforeCollapse?: number;
     itemsAfterCollapse?: number;
     expandText?: string;
+    sx?: SxProps;
 }
 
 type RenderItem = (BreadcrumbItem & { index: number; isLast: boolean }) | { type: 'ellipsis' };
@@ -30,6 +32,7 @@ export function Breadcrumbs({
     itemsAfterCollapse = 1,
     expandText = 'Show path',
     className = '',
+    sx,
     ...props
 }: BreadcrumbsProps) {
     const { theme, contrast } = useTheme();
@@ -61,7 +64,7 @@ export function Breadcrumbs({
     const classes = ['breadcrumbs', className].filter(Boolean).join(' ');
 
     return (
-        <nav className={classes} data-theme={theme} data-contrast={contrast} aria-label={ariaLabel} {...props}>
+        <nav className={classes} style={sxToStyle(sx)} data-theme={theme} data-contrast={contrast} aria-label={ariaLabel} {...props}>
             <ol className="breadcrumbs__list">
                 {renderItems.map((item, idx) => {
                     const isEllipsis = (item as any).type === 'ellipsis';

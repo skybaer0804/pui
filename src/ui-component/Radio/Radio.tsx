@@ -1,6 +1,7 @@
 import { JSX } from 'preact';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
-export interface RadioProps extends Omit<JSX.HTMLAttributes<HTMLInputElement>, 'onChange'> {
+export interface RadioProps extends Omit<JSX.HTMLAttributes<HTMLInputElement>, 'onChange' | 'style'> {
     checked?: boolean;
     defaultChecked?: boolean;
     disabled?: boolean;
@@ -10,9 +11,10 @@ export interface RadioProps extends Omit<JSX.HTMLAttributes<HTMLInputElement>, '
     color?: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info';
     size?: 'small' | 'medium';
     label?: string;
+    sx?: SxProps;
 }
 
-export function Radio({ checked, disabled = false, onChange, value, name, color = 'primary', size = 'medium', label, className = '', ...props }: RadioProps) {
+export function Radio({ checked, disabled = false, onChange, value, name, color = 'primary', size = 'medium', label, className = '', sx, ...props }: RadioProps) {
     const handleChange = (e: Event) => {
         if (disabled) return;
         const target = e.target as HTMLInputElement;
@@ -20,7 +22,7 @@ export function Radio({ checked, disabled = false, onChange, value, name, color 
     };
 
     return (
-        <label className={`radio radio--${color} radio--${size} ${disabled ? 'radio--disabled' : ''} ${className}`}>
+        <label className={`radio radio--${color} radio--${size} ${disabled ? 'radio--disabled' : ''} ${className}`} style={sxToStyle(sx)}>
             <span className="radio__input-wrapper">
                 <input
                     type="radio"

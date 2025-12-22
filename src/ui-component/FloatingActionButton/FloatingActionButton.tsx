@@ -1,13 +1,15 @@
 import { JSX } from 'preact';
 import { useTheme } from '../../context/ThemeProvider';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
-export interface FloatingActionButtonProps extends JSX.HTMLAttributes<HTMLButtonElement> {
+export interface FloatingActionButtonProps extends Omit<JSX.HTMLAttributes<HTMLButtonElement>, 'style'> {
     variant?: 'circular' | 'extended';
     size?: 'sm' | 'md' | 'lg';
     color?: 'primary' | 'secondary' | 'default';
     disabled?: boolean;
     icon?: preact.ComponentChildren;
     label?: preact.ComponentChildren; // used for extended
+    sx?: SxProps;
 }
 
 export function FloatingActionButton({
@@ -19,6 +21,7 @@ export function FloatingActionButton({
     label,
     className = '',
     children,
+    sx,
     ...props
 }: FloatingActionButtonProps) {
     const { theme, contrast } = useTheme();
@@ -32,7 +35,7 @@ export function FloatingActionButton({
     const classes = ['fab', `fab--${variant}`, `fab--${size}`, `fab--${color}`, className].filter(Boolean).join(' ');
 
     return (
-        <button className={classes} disabled={disabled} data-theme={theme} data-contrast={contrast} type="button" {...props}>
+        <button className={classes} style={sxToStyle(sx)} disabled={disabled} data-theme={theme} data-contrast={contrast} type="button" {...props}>
             {content}
         </button>
     );

@@ -1,15 +1,17 @@
 import { JSX } from 'preact';
 import { useTheme } from '../../context/ThemeProvider';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
-export interface BadgeProps extends JSX.HTMLAttributes<HTMLSpanElement> {
+export interface BadgeProps extends Omit<JSX.HTMLAttributes<HTMLSpanElement>, 'style'> {
     badgeContent?: preact.ComponentChildren;
     color?: 'primary' | 'secondary' | 'error' | 'warning' | 'success';
     variant?: 'standard' | 'dot';
     invisible?: boolean;
+    sx?: SxProps;
     children: preact.ComponentChildren;
 }
 
-export function Badge({ badgeContent, color = 'primary', variant = 'standard', invisible = false, className = '', children, ...props }: BadgeProps) {
+export function Badge({ badgeContent, color = 'primary', variant = 'standard', invisible = false, className = '', children, sx, ...props }: BadgeProps) {
     const { theme } = useTheme();
 
     if (invisible) return <>{children}</>;
@@ -26,7 +28,7 @@ export function Badge({ badgeContent, color = 'primary', variant = 'standard', i
         .join(' ');
 
     return (
-        <span className={classes} {...props}>
+        <span className={classes} style={sxToStyle(sx)} {...props}>
             {children}
             {!invisible && (
                 <span className={badgeClasses} data-theme={theme}>

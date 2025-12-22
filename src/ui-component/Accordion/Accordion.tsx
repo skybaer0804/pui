@@ -2,6 +2,7 @@ import { JSX } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
 import { IconChevronDown } from '@tabler/icons-react';
 import { useTheme } from '../../context/ThemeProvider';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
 export type AccordionValue = string | number;
 
@@ -12,7 +13,7 @@ export interface AccordionItem {
     disabled?: boolean;
 }
 
-export interface AccordionProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface AccordionProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange' | 'style'> {
     items: AccordionItem[];
     expanded?: AccordionValue | AccordionValue[] | null;
     defaultExpanded?: AccordionValue | AccordionValue[] | null;
@@ -20,6 +21,7 @@ export interface AccordionProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>,
     allowMultiple?: boolean;
     ariaLabel?: string;
     disableGutters?: boolean;
+    sx?: SxProps;
 }
 
 const normalizeExpanded = (expanded: AccordionProps['expanded'], allowMultiple: boolean): AccordionValue[] => {
@@ -37,6 +39,7 @@ export function Accordion({
     ariaLabel = 'accordion',
     disableGutters = false,
     className = '',
+    sx,
     ...props
 }: AccordionProps) {
     const { theme, contrast } = useTheme();
@@ -67,7 +70,7 @@ export function Accordion({
         .join(' ');
 
     return (
-        <div className={classes} data-theme={theme} data-contrast={contrast} aria-label={ariaLabel} {...props}>
+        <div className={classes} style={sxToStyle(sx)} data-theme={theme} data-contrast={contrast} aria-label={ariaLabel} {...props}>
             {items.map((item, index) => {
                 const isOpen = currentExpanded.includes(item.value);
                 const isDisabled = !!item.disabled;

@@ -1,6 +1,7 @@
 import { JSX } from 'preact';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
-export interface BoxProps extends JSX.HTMLAttributes<HTMLDivElement> {
+export interface BoxProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'style'> {
   padding?: string; // e.g., 'md', 'lg' mapping to tokens or raw values
   margin?: string;
   background?: string; // Token reference or raw value
@@ -11,6 +12,7 @@ export interface BoxProps extends JSX.HTMLAttributes<HTMLDivElement> {
   height?: string;
   display?: string;
   className?: string;
+  sx?: SxProps;
 }
 
 export function Box({
@@ -24,7 +26,7 @@ export function Box({
   height,
   display,
   className = '',
-  style,
+  sx,
   children,
   ...props
 }: BoxProps) {
@@ -38,7 +40,7 @@ export function Box({
     width,
     height,
     display,
-    ...((style as object) || {}),
+    ...sxToStyle(sx),
   };
 
   return (

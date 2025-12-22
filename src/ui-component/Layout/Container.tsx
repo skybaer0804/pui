@@ -1,9 +1,11 @@
 import { Box, BoxProps } from './Box';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
-export interface ContainerProps extends BoxProps {
+export interface ContainerProps extends Omit<BoxProps, 'sx'> {
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | false;
   fixed?: boolean; // If true, max-width matches the min-width of the current breakpoint
   disableGutters?: boolean;
+  sx?: SxProps;
 }
 
 export function Container({
@@ -11,7 +13,7 @@ export function Container({
   fixed = false,
   disableGutters = false,
   className = '',
-  style,
+  sx,
   children,
   ...props
 }: ContainerProps) {
@@ -34,7 +36,7 @@ export function Container({
     paddingRight: disableGutters ? 0 : 'var(--space-gap-md)',
     width: '100%',
     maxWidth: maxWidth ? `var(--layout-container-${maxWidth}, 100%)` : '100%',
-    ...((style as object) || {}),
+    ...sxToStyle(sx),
   };
 
   return (

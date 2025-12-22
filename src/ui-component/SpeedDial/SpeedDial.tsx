@@ -1,6 +1,7 @@
 import { JSX } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
 import { useTheme } from '../../context/ThemeProvider';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
 export interface SpeedDialAction {
     name: string;
@@ -9,7 +10,7 @@ export interface SpeedDialAction {
     disabled?: boolean;
 }
 
-export interface SpeedDialProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface SpeedDialProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange' | 'style'> {
     ariaLabel: string;
     actions: SpeedDialAction[];
     icon?: preact.ComponentChildren;
@@ -24,6 +25,7 @@ export interface SpeedDialProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>,
     openOnHover?: boolean;
     tooltipPlacement?: 'left' | 'right' | 'top' | 'bottom';
     showBackdrop?: boolean;
+    sx?: SxProps;
 }
 
 export function SpeedDial({
@@ -42,6 +44,7 @@ export function SpeedDial({
     tooltipPlacement,
     showBackdrop = false,
     className = '',
+    sx,
     ...props
 }: SpeedDialProps) {
     const { theme, contrast } = useTheme();
@@ -72,6 +75,7 @@ export function SpeedDial({
     return (
         <div
             className={classes}
+            style={sxToStyle(sx)}
             data-theme={theme}
             data-contrast={contrast}
             onKeyDown={(e) => {

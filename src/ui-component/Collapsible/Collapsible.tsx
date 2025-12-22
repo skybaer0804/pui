@@ -3,15 +3,17 @@ import { useState } from 'preact/hooks';
 import { IconChevronDown, IconChevronRight } from '@tabler/icons-react';
 import { Flex } from '../Layout/Flex';
 import { Typography } from '../Typography/Typography';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
-export interface CollapsibleProps extends JSX.HTMLAttributes<HTMLDivElement> {
+export interface CollapsibleProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'style'> {
     title: string;
     defaultOpen?: boolean;
     icon?: JSX.Element;
+    sx?: SxProps;
     children: preact.ComponentChildren;
 }
 
-export function Collapsible({ title, defaultOpen = false, icon, className = '', children, ...props }: CollapsibleProps) {
+export function Collapsible({ title, defaultOpen = false, icon, className = '', children, sx, ...props }: CollapsibleProps) {
     const [isOpen, setIsOpen] = useState(defaultOpen);
 
     const toggle = () => {
@@ -19,9 +21,9 @@ export function Collapsible({ title, defaultOpen = false, icon, className = '', 
     };
 
     return (
-        <div className={`collapsible ${className}`} {...props}>
+        <div className={`collapsible ${className}`} style={sxToStyle(sx)} {...props}>
             <button className="collapsible__header" onClick={toggle} type="button">
-                <Flex align="center" gap="xs" style={{ flex: 1 }}>
+                <Flex align="center" gap="xs" sx={{ flex: 1 }}>
                     <span className="collapsible__toggle">{isOpen ? <IconChevronDown size={16} /> : <IconChevronRight size={16} />}</span>
                     {icon && <span className="collapsible__icon">{icon}</span>}
                     <Typography variant="body-medium" className="collapsible__title">

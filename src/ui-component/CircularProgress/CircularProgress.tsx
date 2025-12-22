@@ -1,11 +1,13 @@
 import { JSX } from 'preact';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
-export interface CircularProgressProps extends JSX.HTMLAttributes<HTMLSpanElement> {
+export interface CircularProgressProps extends Omit<JSX.HTMLAttributes<HTMLSpanElement>, 'style'> {
     color?: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info' | 'inherit';
     size?: number | string;
     value?: number; // 0-100
     variant?: 'determinate' | 'indeterminate';
     thickness?: number;
+    sx?: SxProps;
 }
 
 export function CircularProgress({
@@ -15,7 +17,7 @@ export function CircularProgress({
     variant = 'indeterminate',
     thickness = 3.6,
     className = '',
-    style,
+    sx,
     ...props
 }: CircularProgressProps) {
     const circleStyle: JSX.CSSProperties = {};
@@ -33,7 +35,7 @@ export function CircularProgress({
         width: size,
         height: size,
         ...rootStyle,
-        ...(style && typeof style === 'object' && !('value' in style) ? style : {}),
+        ...sxToStyle(sx),
     } as JSX.CSSProperties;
 
     return (

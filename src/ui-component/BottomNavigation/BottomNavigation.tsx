@@ -1,6 +1,7 @@
 import { JSX } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
 import { useTheme } from '../../context/ThemeProvider';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
 export type BottomNavigationValue = string | number;
 
@@ -11,7 +12,7 @@ export interface BottomNavigationItem {
     disabled?: boolean;
 }
 
-export interface BottomNavigationProps extends Omit<JSX.HTMLAttributes<HTMLElement>, 'onChange'> {
+export interface BottomNavigationProps extends Omit<JSX.HTMLAttributes<HTMLElement>, 'onChange' | 'style'> {
     items: BottomNavigationItem[];
     value?: BottomNavigationValue;
     defaultValue?: BottomNavigationValue;
@@ -19,6 +20,7 @@ export interface BottomNavigationProps extends Omit<JSX.HTMLAttributes<HTMLEleme
     showLabels?: boolean;
     position?: 'fixed' | 'static';
     ariaLabel?: string;
+    sx?: SxProps;
 }
 
 export function BottomNavigation({
@@ -30,6 +32,7 @@ export function BottomNavigation({
     position = 'static',
     ariaLabel = 'bottom navigation',
     className = '',
+    sx,
     ...props
 }: BottomNavigationProps) {
     const { theme, contrast } = useTheme();
@@ -62,7 +65,7 @@ export function BottomNavigation({
         .join(' ');
 
     return (
-        <nav className={classes} data-theme={theme} data-contrast={contrast} aria-label={ariaLabel} {...props}>
+        <nav className={classes} style={sxToStyle(sx)} data-theme={theme} data-contrast={contrast} aria-label={ariaLabel} {...props}>
             <div className="bottom-navigation__list" role="tablist" aria-label={ariaLabel}>
                 {items.map((item, idx) => {
                     const isSelected = item.value === selectedValue;

@@ -2,6 +2,7 @@ import { JSX } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
 import { useTheme } from '../../context/ThemeProvider';
 import { Radio } from '../Radio/Radio';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
 export type RadioGroupValue = string | number;
 
@@ -11,7 +12,7 @@ export interface RadioGroupOption {
     disabled?: boolean;
 }
 
-export interface RadioGroupProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface RadioGroupProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange' | 'style'> {
     label?: string;
     helperText?: string;
     name?: string;
@@ -23,6 +24,7 @@ export interface RadioGroupProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>
     color?: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info';
     size?: 'small' | 'medium';
     disabled?: boolean;
+    sx?: SxProps;
 }
 
 export function RadioGroup({
@@ -38,6 +40,7 @@ export function RadioGroup({
     size = 'medium',
     disabled = false,
     className = '',
+    sx,
     ...props
 }: RadioGroupProps) {
     const { theme, contrast } = useTheme();
@@ -66,7 +69,7 @@ export function RadioGroup({
     const classes = ['radio-group', `radio-group--${direction}`, disabled ? 'radio-group--disabled' : '', className].filter(Boolean).join(' ');
 
     return (
-        <div className={classes} data-theme={theme} data-contrast={contrast} role="radiogroup" {...props}>
+        <div className={classes} style={sxToStyle(sx)} data-theme={theme} data-contrast={contrast} role="radiogroup" {...props}>
             {label && <div className="radio-group__label">{label}</div>}
             <div className="radio-group__options">
                 {options.map((opt) => {

@@ -2,6 +2,7 @@ import { JSX } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
 import { IconChevronLeft, IconChevronRight, IconChevronsLeft, IconChevronsRight } from '@tabler/icons-react';
 import { useTheme } from '../../context/ThemeProvider';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
 type PaginationItemType = 'page' | 'ellipsis' | 'first' | 'previous' | 'next' | 'last';
 
@@ -13,7 +14,7 @@ interface PaginationItem {
     selected?: boolean;
 }
 
-export interface PaginationProps extends Omit<JSX.HTMLAttributes<HTMLElement>, 'onChange'> {
+export interface PaginationProps extends Omit<JSX.HTMLAttributes<HTMLElement>, 'onChange' | 'style'> {
     count: number;
     page?: number;
     defaultPage?: number;
@@ -29,6 +30,7 @@ export interface PaginationProps extends Omit<JSX.HTMLAttributes<HTMLElement>, '
     shape?: 'rounded' | 'circular';
     size?: 'sm' | 'md';
     ariaLabel?: string;
+    sx?: SxProps;
 }
 
 const clamp = (n: number, min: number, max: number) => Math.min(max, Math.max(min, n));
@@ -122,6 +124,7 @@ export function Pagination({
     size = 'md',
     ariaLabel = 'pagination',
     className = '',
+    sx,
     ...props
 }: PaginationProps) {
     const { theme, contrast } = useTheme();
@@ -168,7 +171,7 @@ export function Pagination({
     };
 
     return (
-        <nav className={classes} data-theme={theme} data-contrast={contrast} aria-label={ariaLabel} {...props}>
+        <nav className={classes} style={sxToStyle(sx)} data-theme={theme} data-contrast={contrast} aria-label={ariaLabel} {...props}>
             <ul className="pagination__list">
                 {items.map((item) => {
                     if (item.type === 'ellipsis') {

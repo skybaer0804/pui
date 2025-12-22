@@ -3,8 +3,9 @@ import { useEffect, useMemo, useRef } from 'preact/hooks';
 import { IconX } from '@tabler/icons-react';
 import { useTheme } from '../../context/ThemeProvider';
 import { IconButton } from '../Button/IconButton';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
-export interface DialogProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'title'> {
+export interface DialogProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'title' | 'style'> {
     open: boolean;
     onClose: (event?: Event) => void;
     title?: preact.ComponentChildren;
@@ -17,6 +18,7 @@ export interface DialogProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 't
     hideCloseButton?: boolean;
     ariaLabelledby?: string;
     ariaDescribedby?: string;
+    sx?: SxProps;
 }
 
 const getFocusableElements = (root: HTMLElement) => {
@@ -39,6 +41,7 @@ export function Dialog({
     ariaLabelledby,
     ariaDescribedby,
     className = '',
+    sx,
     ...props
 }: DialogProps) {
     const { theme, contrast } = useTheme();
@@ -122,6 +125,7 @@ export function Dialog({
 
             <div
                 className={classes}
+                style={sxToStyle(sx)}
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby={titleId}

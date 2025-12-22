@@ -1,6 +1,7 @@
 import { Box, BoxProps } from './Box';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
-export interface GridProps extends BoxProps {
+export interface GridProps extends Omit<BoxProps, 'sx'> {
     container?: boolean;
     spacing?: number | 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | string;
     rowSpacing?: number | 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | string;
@@ -9,6 +10,7 @@ export interface GridProps extends BoxProps {
     rows?: string | number;
     gap?: string; // legacy alias of spacing
     flow?: 'row' | 'column' | 'dense';
+    sx?: SxProps;
 }
 
 const formatGridTemplate = (value?: string | number) => {
@@ -30,7 +32,7 @@ const resolveSpacingValue = (value?: GridProps['spacing']) => {
     return v;
 };
 
-export function Grid({ container = true, spacing, rowSpacing, columnSpacing, columns, rows, gap, flow, className = '', style, children, ...props }: GridProps) {
+export function Grid({ container = true, spacing, rowSpacing, columnSpacing, columns, rows, gap, flow, className = '', sx, children, ...props }: GridProps) {
     const baseSpacing = resolveSpacingValue(spacing ?? gap);
     const resolvedRowSpacing = resolveSpacingValue(rowSpacing);
     const resolvedColumnSpacing = resolveSpacingValue(columnSpacing);
@@ -46,7 +48,7 @@ export function Grid({ container = true, spacing, rowSpacing, columnSpacing, col
                   '--grid-auto-flow': flow,
               }
             : {}),
-        ...((style as object) || {}),
+        ...sxToStyle(sx),
     } as any;
 
     return (

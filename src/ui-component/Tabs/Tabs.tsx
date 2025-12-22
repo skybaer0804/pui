@@ -1,6 +1,7 @@
 import { JSX } from 'preact';
 import { useMemo, useRef, useState } from 'preact/hooks';
 import { useTheme } from '../../context/ThemeProvider';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
 export type TabsValue = string | number;
 
@@ -11,7 +12,7 @@ export interface TabsItem {
     disabled?: boolean;
 }
 
-export interface TabsProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface TabsProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange' | 'style'> {
     items: TabsItem[];
     value?: TabsValue;
     defaultValue?: TabsValue;
@@ -21,6 +22,7 @@ export interface TabsProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onC
     variant?: 'standard' | 'scrollable' | 'fullWidth';
     selectionFollowsFocus?: boolean;
     keepMounted?: boolean;
+    sx?: SxProps;
 }
 
 const toDomIdPart = (value: TabsValue) =>
@@ -39,6 +41,7 @@ export function Tabs({
     selectionFollowsFocus = false,
     keepMounted = false,
     className = '',
+    sx,
     ...props
 }: TabsProps) {
     const { theme, contrast } = useTheme();
@@ -105,7 +108,7 @@ export function Tabs({
     const classes = ['tabs', `tabs--${orientation}`, `tabs--${variant}`, className].filter(Boolean).join(' ');
 
     return (
-        <div className={classes} data-theme={theme} data-contrast={contrast} {...props}>
+        <div className={classes} style={sxToStyle(sx)} data-theme={theme} data-contrast={contrast} {...props}>
             <div className="tabs__list" role="tablist" aria-label={ariaLabel} aria-orientation={orientation}>
                 {items.map((item, idx) => {
                     const isSelected = item.value === selectedValue;

@@ -1,14 +1,16 @@
 import { JSX } from 'preact';
 import { IconInfoCircle, IconCheck, IconAlertTriangle, IconAlertCircle, IconX } from '@tabler/icons-react';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
-export interface AlertProps extends JSX.HTMLAttributes<HTMLDivElement> {
+export interface AlertProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'style'> {
     severity?: 'success' | 'info' | 'warning' | 'error';
     variant?: 'filled' | 'outlined' | 'standard';
     onClose?: (event: Event) => void;
     icon?: JSX.Element | boolean;
+    sx?: SxProps;
 }
 
-export function Alert({ severity = 'success', variant = 'standard', onClose, icon, className = '', children, ...props }: AlertProps) {
+export function Alert({ severity = 'success', variant = 'standard', onClose, icon, className = '', children, sx, ...props }: AlertProps) {
     const defaultIcon = {
         success: <IconCheck size={22} />,
         info: <IconInfoCircle size={22} />,
@@ -23,7 +25,7 @@ export function Alert({ severity = 'success', variant = 'standard', onClose, ico
     };
 
     return (
-        <div className={`alert alert--${severity} alert--${variant} ${className}`} role="alert" {...props}>
+        <div className={`alert alert--${severity} alert--${variant} ${className}`} style={sxToStyle(sx)} role="alert" {...props}>
             {renderIcon()}
             <div className="alert__message">{children}</div>
             {onClose && (

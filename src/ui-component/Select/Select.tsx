@@ -1,12 +1,13 @@
 import { JSX } from 'preact';
 import { useTheme } from '../../context/ThemeProvider';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
 export interface SelectOption {
     value: string | number;
     label: string;
 }
 
-export interface SelectProps extends Omit<JSX.HTMLAttributes<HTMLSelectElement>, 'size'> {
+export interface SelectProps extends Omit<JSX.HTMLAttributes<HTMLSelectElement>, 'size' | 'style'> {
     label?: string;
     options: SelectOption[];
     error?: boolean;
@@ -15,9 +16,10 @@ export interface SelectProps extends Omit<JSX.HTMLAttributes<HTMLSelectElement>,
     value?: string | number;
     disabled?: boolean;
     onChange?: JSX.GenericEventHandler<HTMLSelectElement>;
+    sx?: SxProps;
 }
 
-export function Select({ label, options, error, helperText, fullWidth = true, className = '', ...props }: SelectProps) {
+export function Select({ label, options, error, helperText, fullWidth = true, className = '', sx, ...props }: SelectProps) {
     const { theme, contrast } = useTheme();
     const selectId = props.id || `select-${Math.random().toString(36).substr(2, 9)}`;
 
@@ -25,7 +27,7 @@ export function Select({ label, options, error, helperText, fullWidth = true, cl
     const selectClasses = ['select', error ? 'error' : ''].filter(Boolean).join(' ');
 
     return (
-        <div className={wrapperClasses} data-theme={theme} data-contrast={contrast}>
+        <div className={wrapperClasses} style={sxToStyle(sx)} data-theme={theme} data-contrast={contrast}>
             {label && (
                 <label htmlFor={selectId} className="select-label">
                     {label}

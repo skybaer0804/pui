@@ -1,6 +1,7 @@
 import { JSX } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
 import { useTheme } from '../../context/ThemeProvider';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
 export interface StepperStep {
     label: preact.ComponentChildren;
@@ -11,7 +12,7 @@ export interface StepperStep {
     error?: boolean;
 }
 
-export interface StepperProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface StepperProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange' | 'style'> {
     steps: StepperStep[];
     activeStep?: number;
     defaultActiveStep?: number;
@@ -36,6 +37,7 @@ export function Stepper({
     ariaLabel = 'stepper',
     showContent = false,
     className = '',
+    sx,
     ...props
 }: StepperProps) {
     const { theme, contrast } = useTheme();
@@ -56,7 +58,7 @@ export function Stepper({
         .join(' ');
 
     return (
-        <div className={classes} data-theme={theme} data-contrast={contrast} aria-label={ariaLabel} {...props}>
+        <div className={classes} style={sxToStyle(sx)} data-theme={theme} data-contrast={contrast} aria-label={ariaLabel} {...props}>
             <ol className="stepper__list" role="list">
                 {steps.map((step, index) => {
                     const isActive = index === currentActive;

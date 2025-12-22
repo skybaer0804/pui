@@ -1,17 +1,19 @@
 import { JSX } from 'preact';
 import { useTheme } from '../../context/ThemeProvider';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
 export type TypographyVariant = 'display-large' | 'h1' | 'h2' | 'h3' | 'h4' | 'body-large' | 'body-medium' | 'body-small' | 'caption';
 
-export interface TypographyProps extends JSX.HTMLAttributes<HTMLElement> {
+export interface TypographyProps extends Omit<JSX.HTMLAttributes<HTMLElement>, 'style'> {
     variant?: TypographyVariant;
     component?: any;
     align?: 'left' | 'center' | 'right' | 'justify';
     color?: string; // e.g. 'text-primary'
+    sx?: SxProps;
     children: preact.ComponentChildren;
 }
 
-export function Typography({ variant = 'body-medium', component, align = 'left', color, className = '', children, style, ...props }: TypographyProps) {
+export function Typography({ variant = 'body-medium', component, align = 'left', color, className = '', children, sx, ...props }: TypographyProps) {
     const { theme, contrast } = useTheme();
 
     // Determine default tag based on variant if component is not provided
@@ -21,7 +23,7 @@ export function Typography({ variant = 'body-medium', component, align = 'left',
 
     const computedStyle = {
         ...(color && { color: `var(--color-${color}, inherit)` }),
-        ...((style as object) || {}),
+        ...sxToStyle(sx),
     };
 
     return (

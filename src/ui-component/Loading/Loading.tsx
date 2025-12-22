@@ -1,13 +1,15 @@
 import { JSX } from 'preact';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
-export interface LoadingProps extends JSX.HTMLAttributes<HTMLDivElement> {
+export interface LoadingProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'style'> {
     size?: 'small' | 'medium' | 'large';
     fullScreen?: boolean;
+    sx?: SxProps;
 }
 
-export function Loading({ size = 'medium', fullScreen = false, className = '', ...props }: LoadingProps) {
+export function Loading({ size = 'medium', fullScreen = false, className = '', sx, ...props }: LoadingProps) {
     return (
-        <div className={`loading ${fullScreen ? 'loading--fullscreen' : ''} loading--${size} ${className}`} role="status" aria-label="로딩 중" {...props}>
+        <div className={`loading ${fullScreen ? 'loading--fullscreen' : ''} loading--${size} ${className}`} style={sxToStyle(sx)} role="status" aria-label="로딩 중" {...props}>
             <div className="loading__container">
                 {/* 4꼭지점 별 - 회전하지 않음 */}
                 <div className="loading__star">

@@ -1,8 +1,9 @@
 import { JSX, cloneElement } from 'preact';
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import { useTheme } from '../../context/ThemeProvider';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
-export interface TooltipProps extends Omit<JSX.HTMLAttributes<HTMLSpanElement>, 'title'> {
+export interface TooltipProps extends Omit<JSX.HTMLAttributes<HTMLSpanElement>, 'title' | 'style'> {
     title: preact.ComponentChildren;
     placement?: 'top' | 'bottom' | 'left' | 'right';
     open?: boolean;
@@ -15,6 +16,7 @@ export interface TooltipProps extends Omit<JSX.HTMLAttributes<HTMLSpanElement>, 
     disableFocusListener?: boolean;
     disabled?: boolean;
     children: JSX.Element;
+    sx?: SxProps;
 }
 
 export function Tooltip({
@@ -31,6 +33,7 @@ export function Tooltip({
     disabled = false,
     className = '',
     children,
+    sx,
     ...props
 }: TooltipProps) {
     const { theme, contrast } = useTheme();
@@ -97,7 +100,7 @@ export function Tooltip({
     const classes = ['tooltip', `tooltip--${placement}`, isOpen ? 'tooltip--open' : '', className].filter(Boolean).join(' ');
 
     return (
-        <span className={classes} data-theme={theme} data-contrast={contrast} {...props}>
+        <span className={classes} style={sxToStyle(sx)} data-theme={theme} data-contrast={contrast} {...props}>
             {trigger}
             <span id={tooltipId} className="tooltip__content" role="tooltip" aria-hidden={!isOpen}>
                 {title}

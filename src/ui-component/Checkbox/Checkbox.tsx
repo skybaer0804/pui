@@ -1,7 +1,8 @@
 import { JSX } from 'preact';
 import { IconCheck, IconMinus } from '@tabler/icons-react';
+import { SxProps, sxToStyle } from '../../shared/sx';
 
-export interface CheckboxProps extends Omit<JSX.HTMLAttributes<HTMLInputElement>, 'onChange'> {
+export interface CheckboxProps extends Omit<JSX.HTMLAttributes<HTMLInputElement>, 'onChange' | 'style'> {
     checked?: boolean;
     defaultChecked?: boolean;
     indeterminate?: boolean;
@@ -10,6 +11,7 @@ export interface CheckboxProps extends Omit<JSX.HTMLAttributes<HTMLInputElement>
     color?: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info';
     size?: 'small' | 'medium';
     label?: string;
+    sx?: SxProps;
 }
 
 export function Checkbox({
@@ -22,6 +24,7 @@ export function Checkbox({
     size = 'medium',
     label,
     className = '',
+    sx,
     ...props
 }: CheckboxProps) {
     const handleChange = (e: Event) => {
@@ -31,7 +34,7 @@ export function Checkbox({
     };
 
     return (
-        <label className={`checkbox checkbox--${color} checkbox--${size} ${disabled ? 'checkbox--disabled' : ''} ${className}`}>
+        <label className={`checkbox checkbox--${color} checkbox--${size} ${disabled ? 'checkbox--disabled' : ''} ${className}`} style={sxToStyle(sx)}>
             <span className="checkbox__input-wrapper">
                 <input
                     type="checkbox"
