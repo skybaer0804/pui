@@ -2,84 +2,368 @@
 @use '../../styles/tokens/scss-variables/semantic-space' as space;
 @use '../../styles/tokens/scss-variables/primitive-shape' as shape;
 
+// ============================================
+// Select Component Styles
+// MUI Select 패턴을 참고하여 floating label 구현
+// ============================================
+
 .select-group {
-    display: flex;
-    flex-direction: column;
-    gap: space.$space-gap-sm; // 8px
+  display: flex;
+  flex-direction: column;
+  gap: space.$space-gap-sm; // 8px
+  width: 100%;
+  position: relative;
+
+  &--fullWidth {
     width: 100%;
+  }
 
-    &.fullWidth {
-        width: 100%;
-    }
-}
-
-.select-label {
-    font-size: var(--text-label-size);
-    font-weight: var(--text-label-weight);
-    color: var(--text-label-color);
+  &--autoWidth {
+    width: auto;
+    min-width: 0;
+  }
 }
 
 .select-wrapper {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
+
+// ============================================
+// Floating Label
+// ============================================
+
+.select-label {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--primitive-font-family);
+  font-size: var(--input-font-size);
+  font-weight: var(--input-font-weight);
+  color: var(--input-placeholder-color);
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 3rem); // 화살표 공간 확보
+
+  // 기본 위치 (outlined, filled)
+  padding-left: 1rem;
+
+  &--floating {
+    top: 0;
+    transform: translateY(-50%) scale(0.75);
+    font-size: var(--input-label-font-size);
+    font-weight: var(--input-label-font-weight);
+    color: var(--color-text-primary);
+    background-color: var(--color-background-primary);
+    padding-left: 0;
+    padding-right: 0.5rem;
+    max-width: calc(100% - 1rem);
+  }
+
+  &--required {
+    color: var(--color-status-error);
+  }
+}
+
+// ============================================
+// Base Select Styles
+// ============================================
 
 .select {
-    width: 100%;
-    height: 3rem; // 48px
-    padding: space.$space-padding-input space.$space-padding-input + 24px space.$space-padding-input space.$space-padding-input; // top: 16px, right: 40px, bottom: 16px, left: 16px
-    border: 1px solid var(--select-border); // 테마 변경 지원을 위해 색상은 CSS 변수 유지
-    border-radius: shape.$primitive-radius-medium; // 6px
-    box-sizing: border-box; // padding과 border를 width에 포함
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--primitive-font-family);
+  font-weight: var(--input-font-weight);
+  line-height: var(--input-line-height);
+  color: var(--select-color);
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 
+  // 기본 border와 background (outlined variant)
+  border: var(--select-border-width, 1px) solid var(--select-border);
+  border-radius: var(--select-radius, shape.$primitive-radius-medium);
+  background-color: var(--select-background);
+
+  // 화살표 아이콘
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%239CA3AF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-size: 0.7em auto;
+
+  // 텍스트 표시 - 잘림 방지
+  overflow: visible;
+  text-overflow: clip;
+  white-space: nowrap;
+
+  // 옵션 스타일
+  option {
+    padding: space.$space-padding-input;
+    white-space: normal;
+  }
+
+  // placeholder 옵션이 선택되었을 때 (value가 빈 문자열)
+  &[data-placeholder='true'] {
+    color: var(--input-placeholder-color);
+  }
+
+  // ============================================
+  // Sizes (기본값은 md)
+  // ============================================
+
+  &--sm {
+    height: 2rem; // 32px
+    padding: 0.5rem; // 8px
+    padding-right: calc(0.5rem + 2rem); // 화살표 공간
+    padding-top: 0.5rem; // floating label을 위한 상단 패딩
+    font-size: var(--typo-body-small-size);
+    line-height: var(--typo-body-small-line-height);
+    background-position: right 0.5rem center;
+    background-size: 0.6em auto;
+  }
+
+  &--md {
+    height: 3.5rem; // 56px
+    padding: 1rem; // 16px
+    padding-right: calc(1rem + 2.5rem); // 화살표 공간 충분히 확보
+    padding-top: 1rem; // floating label을 위한 상단 패딩
     font-size: var(--select-font-size);
-    font-family: inherit;
-    color: var(--select-color);
-    background-color: var(--select-background);
-
-    appearance: none; // Hide default arrow
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%239CA3AF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-    background-repeat: no-repeat;
+    line-height: var(--input-line-height);
     background-position: right 1rem center;
-    background-size: 0.65em auto;
+    background-size: 0.7em auto;
+  }
 
-    overflow: visible; // 텍스트가 잘리지 않도록
-    text-overflow: clip; // ellipsis 대신 clip 사용하여 텍스트 표시
-    white-space: normal; // 텍스트가 정상적으로 줄바꿈되도록
+  &--lg {
+    height: 4rem; // 64px
+    padding: 1.25rem; // 20px
+    padding-right: calc(1.25rem + 2.75rem); // 화살표 공간
+    padding-top: 1.25rem; // floating label을 위한 상단 패딩
+    font-size: var(--typo-body-large-size);
+    line-height: var(--typo-body-large-line-height);
+    background-position: right 1.25rem center;
+    background-size: 0.75em auto;
+  }
 
-    cursor: pointer;
-    transition: all 0.2s ease;
+  // 기본값 (size가 없을 때) - md와 동일
+  &:not(.select--sm):not(.select--md):not(.select--lg) {
+    height: 3.5rem; // 56px
+    padding: 1rem; // 16px
+    padding-right: calc(1rem + 2.5rem);
+    padding-top: 1rem;
+    font-size: var(--select-font-size);
+    line-height: var(--input-line-height);
+    background-position: right 1rem center;
+    background-size: 0.7em auto;
+  }
 
-    @media (max-width: 768px) {
-        height: 2.5rem; // 40px
-        font-size: 0.875rem; // 14px
-        padding: 0.5rem 2rem 0.5rem 0.75rem; // top: 8px, right: 32px, bottom: 8px, left: 12px
+  // ============================================
+  // States
+  // ============================================
+
+  &:focus {
+    outline: none;
+    border-color: var(--select-focus-border);
+    box-shadow: var(--select-focus-shadow);
+  }
+
+  &--error {
+    border-color: var(--input-error-border);
+  }
+
+  &--error:focus {
+    border-color: var(--input-error-border);
+    box-shadow: 0 0 0 3px rgba(var(--color-status-error-rgb, 239, 68, 68), 0.1);
+  }
+
+  &:disabled,
+  &--disabled {
+    background-color: var(--input-disabled-background);
+    color: var(--input-disabled-text);
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  &--readOnly {
+    cursor: default;
+    background-color: var(--color-background-secondary);
+  }
+
+  // ============================================
+  // Responsive
+  // ============================================
+
+  @media (max-width: 768px) {
+    &:not(.select--sm):not(.select--md):not(.select--lg) {
+      height: 2.5rem; // 40px
+      font-size: var(--typo-body-small-size);
+      padding: 0.75rem;
+      padding-right: calc(0.75rem + 2rem);
+      padding-top: 0.75rem;
+      background-position: right 0.75rem center;
     }
-
-    &:focus {
-        outline: none;
-        border-color: var(--select-focus-border);
-        box-shadow: var(--select-focus-shadow);
-    }
-
-    &.error {
-        border-color: var(--color-status-error);
-    }
-
-    &:disabled {
-        background-color: var(--input-disabled-background);
-        color: var(--input-disabled-text);
-        cursor: not-allowed;
-        opacity: 0.7;
-    }
+  }
 }
 
-.select-helper-text {
-    font-size: var(--typo-label-small-size);
-    color: var(--text-label-color);
-    margin-top: space.$space-gap-xs; // SCSS 변수 사용
+// ============================================
+// Variants (MUI 패턴 참고)
+// ============================================
 
-    &.error {
-        color: var(--color-status-error);
+// Outlined variant (기본)
+.select-group--outlined {
+  .select-label {
+    padding-left: 1rem;
+
+    &--floating {
+      left: 0.875rem; // border 두께 고려
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+      background-color: var(--color-background-primary);
     }
+  }
+
+  .select {
+    padding-top: 1rem; // floating label 공간 확보
+
+    &--sm {
+      padding-top: 0.5rem;
+    }
+
+    &--lg {
+      padding-top: 1.25rem;
+    }
+  }
+}
+
+// Standard variant
+.select-group--standard {
+  .select-label {
+    padding-left: 0;
+
+    &--floating {
+      left: 0;
+      padding-left: 0;
+      padding-right: 0.5rem;
+      background-color: transparent;
+    }
+  }
+
+  .select {
+    border-radius: 0 !important;
+    border: none !important;
+    border-bottom: var(--select-border-width, 1px) solid var(--select-border) !important;
+    background-color: transparent !important;
+    padding-left: 0 !important;
+    padding-top: 1.25rem; // floating label 공간 확보
+
+    &:focus {
+      border-bottom-width: 2px !important;
+      box-shadow: none !important;
+    }
+
+    &.select--error {
+      border-bottom-color: var(--input-error-border) !important;
+    }
+
+    &.select--error:focus {
+      border-bottom-width: 2px !important;
+      box-shadow: none !important;
+    }
+
+    // Size별 padding-right 조정
+    &.select--sm {
+      padding-right: calc(0.5rem + 2rem) !important;
+      padding-top: 0.75rem !important;
+      background-position: right 0 center !important;
+    }
+
+    &.select--md,
+    &:not(.select--sm):not(.select--md):not(.select--lg) {
+      padding-right: calc(1rem + 2.5rem) !important;
+      padding-top: 1.25rem !important;
+      background-position: right 0 center !important;
+    }
+
+    &.select--lg {
+      padding-right: calc(1.25rem + 2.75rem) !important;
+      padding-top: 1.5rem !important;
+      background-position: right 0 center !important;
+    }
+  }
+}
+
+// Filled variant
+.select-group--filled {
+  .select-label {
+    padding-left: 1rem;
+
+    &--floating {
+      left: 0.875rem; // border 두께 고려
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+      background-color: var(--color-background-secondary);
+    }
+  }
+
+  .select {
+    background-color: var(--color-background-secondary) !important;
+    border-radius: shape.$primitive-radius-medium shape.$primitive-radius-medium 0 0 !important;
+    border: none !important;
+    border-bottom: var(--select-border-width, 1px) solid var(--select-border) !important;
+    padding-left: 1rem !important;
+    padding-top: 1.5rem; // floating label 공간 확보
+
+    &:focus {
+      border-bottom-width: 2px !important;
+      box-shadow: none !important;
+      background-color: var(--color-background-tertiary, #ebebeb) !important;
+    }
+
+    &.select--error {
+      border-bottom-color: var(--input-error-border) !important;
+    }
+
+    &.select--error:focus {
+      border-bottom-width: 2px !important;
+      box-shadow: none !important;
+    }
+
+    // Size별 padding 조정
+    &.select--sm {
+      padding-left: 0.5rem !important;
+      padding-right: calc(0.5rem + 2rem) !important;
+      padding-top: 1rem !important;
+    }
+
+    &.select--md,
+    &:not(.select--sm):not(.select--md):not(.select--lg) {
+      padding-left: 1rem !important;
+      padding-right: calc(1rem + 2.5rem) !important;
+      padding-top: 1.5rem !important;
+    }
+
+    &.select--lg {
+      padding-left: 1.25rem !important;
+      padding-right: calc(1.25rem + 2.75rem) !important;
+      padding-top: 1.75rem !important;
+    }
+  }
+}
+
+// ============================================
+// Helper Text
+// ============================================
+
+.select-helper-text {
+  font-family: var(--primitive-font-family);
+  font-size: var(--input-helper-text-font-size);
+  color: var(--input-helper-text-color);
+  margin-top: space.$space-gap-xs; // 4px
+
+  &--error {
+    color: var(--input-error-text-color);
+  }
 }
