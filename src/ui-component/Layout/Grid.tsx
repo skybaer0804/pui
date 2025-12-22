@@ -52,7 +52,7 @@ export function Grid({ container = true, spacing, rowSpacing, columnSpacing, col
     } as any;
 
     return (
-        <Box className={`grid ${container ? 'grid--container' : ''} ${className}`} style={computedStyle} {...props}>
+        <Box className={`grid ${container ? 'grid--container' : ''} ${className}`} sx={computedStyle} {...props}>
             {children}
         </Box>
     );

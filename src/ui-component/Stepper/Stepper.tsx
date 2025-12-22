@@ -22,6 +22,7 @@ export interface StepperProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, '
     nonLinear?: boolean; // step 클릭 이동 허용
     ariaLabel?: string;
     showContent?: boolean; // active step content 표시
+    sx?: SxProps;
 }
 
 const clamp = (n: number, min: number, max: number) => Math.min(max, Math.max(min, n));

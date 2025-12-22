@@ -42,7 +42,7 @@ export function Drawer({ open, onClose, anchor = 'right', title, width = '400px'
             <div className={`drawer drawer--${anchor} ${className}`} style={drawerStyle} {...props}>
                 {title && (
                     <div className="drawer__header">
-                        <Flex align="center" justify="space-between" style={{ flex: 1 }}>
+                        <Flex align="center" justify="space-between" sx={{ flex: 1 }}>
                             <Typography variant="h3" className="drawer__title">
                                 {title}
                             </Typography>

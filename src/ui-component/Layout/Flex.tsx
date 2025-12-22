@@ -31,7 +31,7 @@ export function Flex({
   };
 
   return (
-    <Box style={computedStyle} {...props}>
+    <Box sx={computedStyle} {...props}>
       {children}
     </Box>
   );

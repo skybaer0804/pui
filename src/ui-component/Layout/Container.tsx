@@ -40,7 +40,7 @@ export function Container({
   };
 
   return (
-    <Box className={classes} style={computedStyle} {...props}>
+    <Box className={classes} sx={computedStyle} {...props}>
       {children}
     </Box>
   );

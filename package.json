@@ -1,6 +1,6 @@
 {
     "name": "@skybaer0804/pui",
-    "version": "1.0.0",
+    "version": "1.1.4",
     "description": "Pui is a Preact UI library for building web applications.",
     "main": "./dist/index/index.js",
     "module": "./dist/index/index.esm.js",
