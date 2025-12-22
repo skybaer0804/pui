@@ -55,13 +55,14 @@
 
   &--floating {
     top: 0;
+    left: 0.5rem; // border 두께 고려하여 더 왼쪽으로 이동
     transform: translateY(-50%) scale(0.75);
     font-size: var(--input-label-font-size);
     font-weight: var(--input-label-font-weight);
     color: var(--color-text-primary);
     background-color: var(--color-background-primary);
-    padding-left: 0;
-    padding-right: 0.5rem;
+    padding-left: 0.15rem;
+    padding-right: 0.25rem;
     max-width: calc(100% - 1rem);
   }
 
@@ -244,9 +245,9 @@
     padding-left: 0;
 
     &--floating {
-      left: 0;
-      padding-left: 0;
-      padding-right: 0.5rem;
+      left: 0; // Standard는 border가 없으므로 0
+      padding-left: 0.15rem;
+      padding-right: 0.25rem;
       background-color: transparent;
     }
   }
@@ -301,8 +302,8 @@
     padding-left: 1rem;
 
     &--floating {
-      left: 0.875rem; // border 두께 고려
-      padding-left: 0.25rem;
+      left: 0.5rem; // 기본과 동일하게 통일 (더 왼쪽으로 이동)
+      padding-left: 0.15rem;
       padding-right: 0.25rem;
       background-color: var(--color-background-secondary);
     }
