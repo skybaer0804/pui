@@ -1,6 +1,7 @@
 import { JSX } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
 import { useTheme } from '../../context/ThemeProvider';
+import './Breadcrumbs.scss';
 
 export interface BreadcrumbItem {
     label: preact.ComponentChildren;

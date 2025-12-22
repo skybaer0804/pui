@@ -1,5 +1,6 @@
 import { JSX } from 'preact';
 import { useTheme } from '../../context/ThemeProvider';
+import './Input.scss';
 
 export interface InputProps extends Omit<JSX.HTMLAttributes<HTMLInputElement | HTMLTextAreaElement>, 'size'> {
     label?: string;

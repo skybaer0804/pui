@@ -1,4 +1,5 @@
 import { JSX } from 'preact';
+import './Radio.scss';
 
 export interface RadioProps extends Omit<JSX.HTMLAttributes<HTMLInputElement>, 'onChange'> {
     checked?: boolean;

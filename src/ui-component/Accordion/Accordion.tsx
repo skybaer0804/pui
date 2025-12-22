@@ -2,6 +2,7 @@ import { JSX } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
 import { IconChevronDown } from '@tabler/icons-react';
 import { useTheme } from '../../context/ThemeProvider';
+import './Accordion.scss';
 
 export type AccordionValue = string | number;
 

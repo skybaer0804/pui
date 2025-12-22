@@ -1,4 +1,5 @@
 import { JSX } from 'preact';
+import './Loading.scss';
 
 export interface LoadingProps extends JSX.HTMLAttributes<HTMLDivElement> {
     size?: 'small' | 'medium' | 'large';

@@ -1,4 +1,5 @@
 import { JSX } from 'preact';
+import './Switch.scss';
 
 export interface SwitchProps extends Omit<JSX.HTMLAttributes<HTMLInputElement>, 'onChange'> {
     checked?: boolean;

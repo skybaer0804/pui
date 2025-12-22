@@ -1,5 +1,6 @@
 import { JSX } from 'preact';
 import { IconCheck, IconMinus } from '@tabler/icons-react';
+import './Checkbox.scss';
 
 export interface CheckboxProps extends Omit<JSX.HTMLAttributes<HTMLInputElement>, 'onChange'> {
     checked?: boolean;

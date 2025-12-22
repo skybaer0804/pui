@@ -1,4 +1,5 @@
 import { Box, BoxProps } from './Box';
+import { CSSProperties } from 'preact/compat';
 
 export interface FlexProps extends BoxProps {
   direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
@@ -14,22 +15,28 @@ export function Flex({
   align = 'stretch',
   wrap = 'nowrap',
   gap,
-  style,
+  sx,
   children,
   ...props
 }: FlexProps) {
-  const computedStyle = {
+  // 1. prop 기반 스타일
+  const propBasedStyle: CSSProperties = {
     display: 'flex',
     flexDirection: direction,
     justifyContent: justify,
     alignItems: align,
     flexWrap: wrap,
     ...(gap && { gap: `var(--space-gap-${gap}, ${gap})` }),
-    ...((style as object) || {}),
+  };
+
+  // 2. sx prop으로 오버라이드
+  const computedStyle = {
+    ...propBasedStyle,
+    ...(sx || {}),
   };
 
   return (
-    <Box style={computedStyle} {...props}>
+    <Box sx={computedStyle} {...props}>
       {children}
     </Box>
   );

@@ -1,6 +1,7 @@
 import { JSX } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
 import { useTheme } from '../../context/ThemeProvider';
+import './BottomNavigation.scss';
 
 export type BottomNavigationValue = string | number;
 

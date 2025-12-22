@@ -1,4 +1,5 @@
 import { JSX } from 'preact';
+import './List.scss';
 
 // Top-level List
 export interface ListProps extends JSX.HTMLAttributes<HTMLUListElement> {

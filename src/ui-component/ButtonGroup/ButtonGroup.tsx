@@ -1,5 +1,6 @@
 import { JSX, toChildArray } from 'preact';
 import { useTheme } from '../../context/ThemeProvider';
+import './ButtonGroup.scss';
 
 export interface ButtonGroupProps extends JSX.HTMLAttributes<HTMLDivElement> {
     orientation?: 'horizontal' | 'vertical';

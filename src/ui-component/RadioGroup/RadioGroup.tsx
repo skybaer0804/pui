@@ -2,6 +2,7 @@ import { JSX } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
 import { useTheme } from '../../context/ThemeProvider';
 import { Radio } from '../Radio/Radio';
+import './RadioGroup.scss';
 
 export type RadioGroupValue = string | number;
 

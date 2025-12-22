@@ -1,20 +1,26 @@
 import { JSX } from 'preact';
 import { useEffect } from 'preact/hooks';
+import { CSSProperties } from 'preact/compat';
 import { IconX } from '@tabler/icons-react';
 import { IconButton } from '@/ui-component/Button/IconButton';
 import { Flex } from '@/ui-component/Layout/Flex';
 import { Typography } from '@/ui-component/Typography/Typography';
+import './Drawer.scss';
 
-export interface DrawerProps extends JSX.HTMLAttributes<HTMLDivElement> {
+export interface DrawerProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'style'> {
     open: boolean;
     onClose: () => void;
     anchor?: 'left' | 'right' | 'top' | 'bottom';
     title?: string;
     width?: string;
     children: preact.ComponentChildren;
+    /**
+     * 스타일 오버라이드를 위한 sx prop
+     */
+    sx?: CSSProperties;
 }
 
-export function Drawer({ open, onClose, anchor = 'right', title, width = '400px', className = '', children, ...props }: DrawerProps) {
+export function Drawer({ open, onClose, anchor = 'right', title, width = '400px', className = '', children, sx, ...props }: DrawerProps) {
     useEffect(() => {
         if (open) {
             document.body.style.overflow = 'hidden';
@@ -32,10 +38,17 @@ export function Drawer({ open, onClose, anchor = 'right', title, width = '400px'
     return (
         <>
             <div className="drawer__backdrop" onClick={onClose} />
-            <div className={`drawer drawer--${anchor} ${className}`} style={{ width: anchor === 'left' || anchor === 'right' ? width : 'auto' }} {...props}>
+            <div
+                className={`drawer drawer--${anchor} ${className}`}
+                style={{
+                    width: anchor === 'left' || anchor === 'right' ? width : 'auto',
+                    ...(sx || {}),
+                }}
+                {...props}
+            >
                 {title && (
                     <div className="drawer__header">
-                        <Flex align="center" justify="space-between" style={{ flex: 1 }}>
+                        <Flex align="center" justify="space-between" sx={{ flex: 1 }}>
                             <Typography variant="h3" className="drawer__title">
                                 {title}
                             </Typography>

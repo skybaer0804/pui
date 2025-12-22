@@ -2,6 +2,7 @@ import { JSX } from 'preact';
 import { useMemo, useState } from 'preact/hooks';
 import { IconChevronLeft, IconChevronRight, IconChevronsLeft, IconChevronsRight } from '@tabler/icons-react';
 import { useTheme } from '../../context/ThemeProvider';
+import './Pagination.scss';
 
 type PaginationItemType = 'page' | 'ellipsis' | 'first' | 'previous' | 'next' | 'last';
 

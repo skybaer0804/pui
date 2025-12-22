@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef } from 'preact/hooks';
 import { IconX } from '@tabler/icons-react';
 import { useTheme } from '../../context/ThemeProvider';
 import { IconButton } from '../Button/IconButton';
+import './Dialog.scss';
 
 export interface DialogProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'title'> {
     open: boolean;

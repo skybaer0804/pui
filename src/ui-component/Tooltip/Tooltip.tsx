@@ -1,6 +1,7 @@
 import { JSX, cloneElement } from 'preact';
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import { useTheme } from '../../context/ThemeProvider';
+import './Tooltip.scss';
 
 export interface TooltipProps extends Omit<JSX.HTMLAttributes<HTMLSpanElement>, 'title'> {
     title: preact.ComponentChildren;

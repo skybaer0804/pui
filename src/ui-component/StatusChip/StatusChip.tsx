@@ -1,5 +1,6 @@
 import { JSX } from 'preact';
 import { useTheme } from '../../context/ThemeProvider';
+import './StatusChip.scss';
 
 export type StatusChipVariant = 'active' | 'pending' | 'badge' | 'default';
 

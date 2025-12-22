@@ -3,6 +3,7 @@ import { useState } from 'preact/hooks';
 import { IconChevronDown, IconChevronRight } from '@tabler/icons-react';
 import { Flex } from '../Layout/Flex';
 import { Typography } from '../Typography/Typography';
+import './Collapsible.scss';
 
 export interface CollapsibleProps extends JSX.HTMLAttributes<HTMLDivElement> {
     title: string;
@@ -21,7 +22,7 @@ export function Collapsible({ title, defaultOpen = false, icon, className = '', 
     return (
         <div className={`collapsible ${className}`} {...props}>
             <button className="collapsible__header" onClick={toggle} type="button">
-                <Flex align="center" gap="xs" style={{ flex: 1 }}>
+                <Flex align="center" gap="xs" sx={{ flex: 1 }}>
                     <span className="collapsible__toggle">{isOpen ? <IconChevronDown size={16} /> : <IconChevronRight size={16} />}</span>
                     {icon && <span className="collapsible__icon">{icon}</span>}
                     <Typography variant="body-medium" className="collapsible__title">

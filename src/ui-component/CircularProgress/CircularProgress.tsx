@@ -1,4 +1,5 @@
 import { JSX } from 'preact';
+import './CircularProgress.scss';
 
 export interface CircularProgressProps extends JSX.HTMLAttributes<HTMLSpanElement> {
     color?: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info' | 'inherit';

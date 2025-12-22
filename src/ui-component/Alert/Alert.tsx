@@ -1,5 +1,6 @@
 import { JSX } from 'preact';
 import { IconInfoCircle, IconCheck, IconAlertTriangle, IconAlertCircle, IconX } from '@tabler/icons-react';
+import './Alert.scss';
 
 export interface AlertProps extends JSX.HTMLAttributes<HTMLDivElement> {
     severity?: 'success' | 'info' | 'warning' | 'error';

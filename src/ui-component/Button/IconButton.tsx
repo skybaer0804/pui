@@ -1,5 +1,6 @@
 import { JSX } from 'preact';
 import { useTheme } from '../../context/ThemeProvider';
+import './IconButton.scss';
 
 export interface IconButtonProps extends JSX.HTMLAttributes<HTMLButtonElement> {
     color?: 'primary' | 'secondary' | 'error' | 'default';

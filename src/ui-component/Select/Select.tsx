@@ -1,5 +1,6 @@
 import { JSX } from 'preact';
 import { useTheme } from '../../context/ThemeProvider';
+import './Select.scss';
 
 export interface SelectOption {
     value: string | number;

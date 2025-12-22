@@ -1,6 +1,7 @@
 import { JSX } from 'preact';
 import { useMemo, useRef, useState } from 'preact/hooks';
 import { useTheme } from '../../context/ThemeProvider';
+import './Tabs.scss';
 
 export type TabsValue = string | number;
 

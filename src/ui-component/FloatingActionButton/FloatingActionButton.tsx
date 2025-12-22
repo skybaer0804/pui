@@ -1,5 +1,6 @@
 import { JSX } from 'preact';
 import { useTheme } from '../../context/ThemeProvider';
+import './FloatingActionButton.scss';
 
 export interface FloatingActionButtonProps extends JSX.HTMLAttributes<HTMLButtonElement> {
     variant?: 'circular' | 'extended';

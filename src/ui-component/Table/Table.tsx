@@ -1,5 +1,7 @@
 import { JSX } from 'preact';
+import { CSSProperties } from 'preact/compat';
 import { useTheme } from '../../context/ThemeProvider';
+import './Table.scss';
 
 export type TableAlign = 'left' | 'center' | 'right';
 
@@ -13,7 +15,7 @@ export interface TableColumn<Row> {
     value?: (row: Row, rowIndex: number) => preact.ComponentChildren;
 }
 
-export interface TableProps<Row> extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'children'> {
+export interface TableProps<Row> extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'children' | 'style'> {
     columns: Array<TableColumn<Row>>;
     rows: Row[];
     rowKey?: (row: Row, rowIndex: number) => string | number;
@@ -23,6 +25,10 @@ export interface TableProps<Row> extends Omit<JSX.HTMLAttributes<HTMLDivElement>
     hover?: boolean;
     size?: 'sm' | 'md';
     emptyText?: preact.ComponentChildren;
+    /**
+     * 스타일 오버라이드를 위한 sx prop
+     */
+    sx?: CSSProperties;
 }
 
 export function Table<Row>({
@@ -36,6 +42,7 @@ export function Table<Row>({
     size = 'md',
     emptyText = '데이터가 없습니다.',
     className = '',
+    sx,
     ...props
 }: TableProps<Row>) {
     const { theme, contrast } = useTheme();
@@ -52,7 +59,7 @@ export function Table<Row>({
         .join(' ');
 
     return (
-        <div className={classes} data-theme={theme} data-contrast={contrast} {...props}>
+        <div className={classes} style={sx} data-theme={theme} data-contrast={contrast} {...props}>
             <div className="table__container" role="region" aria-label="table">
                 <table className="table__table">
                     {caption && <caption className="table__caption">{caption}</caption>}

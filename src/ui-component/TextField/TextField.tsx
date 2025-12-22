@@ -1,4 +1,5 @@
 import { Input, InputProps } from '../Input/Input';
+import './TextField.scss';
 
 export interface TextFieldProps extends InputProps {
     variant?: 'outlined' | 'standard' | 'filled';

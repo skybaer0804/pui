@@ -1,4 +1,5 @@
 import { JSX } from 'preact';
+import './Divider.scss';
 
 export interface DividerProps extends JSX.HTMLAttributes<HTMLHRElement> {
     variant?: 'fullWidth' | 'inset' | 'middle';

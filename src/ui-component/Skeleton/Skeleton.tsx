@@ -1,4 +1,5 @@
 import { JSX } from 'preact';
+import './Skeleton.scss';
 
 export interface SkeletonProps extends JSX.HTMLAttributes<HTMLSpanElement> {
     variant?: 'text' | 'rectangular' | 'circular' | 'rounded';

@@ -1,5 +1,6 @@
 import { JSX } from 'preact';
 import { useTheme } from '../../context/ThemeProvider';
+import './Badge.scss';
 
 export interface BadgeProps extends JSX.HTMLAttributes<HTMLSpanElement> {
     badgeContent?: preact.ComponentChildren;

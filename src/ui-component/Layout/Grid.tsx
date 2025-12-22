@@ -1,4 +1,6 @@
 import { Box, BoxProps } from './Box';
+import { CSSProperties } from 'preact/compat';
+import './Grid.scss';
 
 export interface GridProps extends BoxProps {
     container?: boolean;
@@ -30,12 +32,13 @@ const resolveSpacingValue = (value?: GridProps['spacing']) => {
     return v;
 };
 
-export function Grid({ container = true, spacing, rowSpacing, columnSpacing, columns, rows, gap, flow, className = '', style, children, ...props }: GridProps) {
+export function Grid({ container = true, spacing, rowSpacing, columnSpacing, columns, rows, gap, flow, className = '', sx, children, ...props }: GridProps) {
     const baseSpacing = resolveSpacingValue(spacing ?? gap);
     const resolvedRowSpacing = resolveSpacingValue(rowSpacing);
     const resolvedColumnSpacing = resolveSpacingValue(columnSpacing);
 
-    const computedStyle = {
+    // 1. prop 기반 스타일
+    const propBasedStyle: CSSProperties = {
         ...(container
             ? {
                   '--grid-template-columns': formatGridTemplate(columns),
@@ -46,11 +49,18 @@ export function Grid({ container = true, spacing, rowSpacing, columnSpacing, col
                   '--grid-auto-flow': flow,
               }
             : {}),
-        ...((style as object) || {}),
     } as any;
 
+    // 2. sx prop으로 오버라이드
+    const computedStyle = {
+        ...propBasedStyle,
+        ...(sx || {}),
+    };
+
+    const classes = ['grid', container ? 'grid--container' : '', className].filter(Boolean).join(' ');
+
     return (
-        <Box className={`grid ${container ? 'grid--container' : ''} ${className}`} style={computedStyle} {...props}>
+        <Box className={classes} sx={computedStyle} {...props}>
             {children}
         </Box>
     );
